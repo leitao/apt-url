@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Apt-url: Shows the URL of a package
+#
+# Copyright (C) 2017 Breno Leitao <leitao@debian.org>, IBM
+# 
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version
+# 2 of the License, or (at your option) any later version.
+
+FETCH=/usr/lib/apt-move/fetch
+
+# Cleaning the downloaded files
+sudo apt-get clean
+
+if [ ! -f $FETCH ]
+then
+	echo 'Please install apt-move, as:'
+	echo ' # apt-get install apt-move'
+	exit 2
+fi;
+
+if [ -z "$1" ]
+then
+	echo 'Usage:'
+	echo '  ' $0 '<package>'
+	exit 1
+fi
+
+sudo $FETCH -t $1 | tail -n 1
