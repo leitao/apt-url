@@ -10,9 +10,10 @@
 # 2 of the License, or (at your option) any later version.
 
 FETCH=/usr/lib/apt-move/fetch
+which sudo && SUDO=$(which sudo) || SUDO=
 
 # Cleaning the downloaded files
-sudo apt-get clean
+$SUDO apt-get clean
 
 if [ ! -f $FETCH ]
 then
@@ -28,4 +29,4 @@ then
 	exit 1
 fi
 
-sudo $FETCH -t $1 | tail -n 1
+$SUDO $FETCH -t $1 | tail -n 1
